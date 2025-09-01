@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Passwort-Test</title>
+<style>
+  html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #001f4d; 
+}
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    height: 100vh;          
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 2.5rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    max-width: 620px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #222;
+  }
+
+  form {
+    max-width: 480px;
+    margin: 0 auto 2rem auto;
+  }
+
+  .password-container {
+    margin-bottom: 0.5rem;
+  }
+
+  input[type="password"],
+  input[type="text"] {
+    font-size: 1.2rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
+    outline-offset: 2px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  input[type="password"]:focus,
+  input[type="text"]:focus {
+    border-color: #4CAF50;
+  }
+
+  .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .button-row button {
+    padding: 0.7rem 2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    border: none;
+    user-select: none;
+    transition: background-color 0.25s ease;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.1);
+  }
+
+  #togglePasswordBtn {
+    background-color: #2196F3;
+    color: white;
+    box-shadow: 0 3px 7px rgba(33,150,243,0.4);
+  }
+
+  #togglePasswordBtn:hover {
+    background-color: #1976D2;
+  }
+
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 3px 7px rgba(76,175,80,0.4);
+  }
+
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  button[type="button"]:not(#togglePasswordBtn) {
+    background-color: #f44336;
+    color: white;
+    box-shadow: 0 3px 7px rgba(244,67,54,0.4);
+  }
+
+  button[type="button"]:not(#togglePasswordBtn):hover {
+    background-color: #d32f2f;
+  }
+
+  .rules-box {
+    border: 1.5px solid #ccc;
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    background: #fafafa;
+    max-width: 600px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0.7rem;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 1rem;
+  }
+
+  li {
+    margin-bottom: 0.6rem;
+  }
+
+  .valid {
+    color: #4CAF50;
+    font-weight: 600;
+  }
+
+  .invalid {
+    color: #f44336;
+    font-weight: 600;
+  }
+
+  .icon {
+    font-weight: bold;
+    margin-right: 0.6rem;
+    font-size: 1.3rem;
+    vertical-align: middle;
+  }
+
+  /* NEU: Highlight für Zeichenbereiche */
+  .highlight {
+    background-color: #e0e0e0;
+    padding: 0.15rem 0.3rem;
+    border-radius: 4px;
+    font-family: monospace, monospace;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Passwort-Test</h1>
+
+  <form id="passwordForm" onsubmit="event.preventDefault(); validatePassword();">
+    <div class="password-container">
+      <input type="password" id="password" autocomplete="off" placeholder="Passwort eingeben" />
+    </div>
+
+    <div class="button-row">
+      <button id="togglePasswordBtn" type="button" aria-label="Passwort anzeigen oder ausblenden">Anzeigen</button>
+      <button type="submit">Prüfen</button>
+      <button type="button" onclick="resetForm()">Zurücksetzen</button>
+    </div>
+  </form>
+
+  <div class="rules-box">
+    <h2>Passwortregeln</h2>
+    <p>Das Passwort muss folgenden Kriterien entsprechen:</p>
+    <ul id="rules-list">
+      <li id="rule-length"><span class="icon"></span>Mindestens 12 Zeichen</li>
+      <li id="rule-uppercase"><span class="icon"></span>Mindestens 2 Großbuchstaben: <span class="highlight">A-Z</span></li>
+      <li id="rule-lowercase"><span class="icon"></span>Mindestens 2 Kleinbuchstaben: <span class="highlight">a-z</span></li>
+      <li id="rule-digits"><span class="icon"></span>Mindestens 2 Ziffern: <span class="highlight">0-9</span></li>
+      <li id="rule-special"><span class="icon"></span>Mindestens 2 erlaubte Sonderzeichen: 
+        <span class="highlight">!"§%/()=?*+~#-_:{}[]^.@;,</span></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const allowedSpecialChars = `!"§%/()=?*+~#-_:{}[]^.@;,`;
+
+  function validatePassword() {
+    const pw = document.getElementById('password').value;
+
+    const ruleIds = ['rule-length', 'rule-uppercase', 'rule-lowercase', 'rule-digits', 'rule-special'];
+
+    ruleIds.forEach(id => {
+      const li = document.getElementById(id);
+      const icon = li.querySelector('.icon');
+      li.classList.remove('valid', 'invalid');
+      icon.textContent = '';
+    });
+
+    function setRule(id, valid) {
+      const li = document.getElementById(id);
+      const icon = li.querySelector('.icon');
+      if(valid) {
+        li.classList.add('valid');
+        icon.textContent = '✅';
+      } else {
+        li.classList.add('invalid');
+        icon.textContent = '❌';
+      }
+    }
+
+    setRule('rule-length', pw.length >= 12);
+    setRule('rule-uppercase', (pw.match(/[A-Z]/g) || []).length >= 2);
+    setRule('rule-lowercase', (pw.match(/[a-z]/g) || []).length >= 2);
+    setRule('rule-digits', (pw.match(/[0-9]/g) || []).length >= 2);
+
+    const specialCharRegex = new RegExp(`[${escapeForRegex(allowedSpecialChars)}]`, 'g');
+    const specialCharCount = (pw.match(specialCharRegex) || []).length;
+    setRule('rule-special', specialCharCount >= 2);
+
+    const allowedCharsRegex = new RegExp(`^[A-Za-z0-9${escapeForRegex(allowedSpecialChars)}]*$`);
+    if (!allowedCharsRegex.test(pw)) {
+      alert('Warnung: Das Passwort enthält unerlaubte Zeichen!');
+    }
+  }
+
+  function resetForm() {
+    document.getElementById('password').value = '';
+
+    const ruleIds = ['rule-length', 'rule-uppercase', 'rule-lowercase', 'rule-digits', 'rule-special'];
+    ruleIds.forEach(id => {
+      const li = document.getElementById(id);
+      const icon = li.querySelector('.icon');
+      li.classList.remove('valid', 'invalid');
+      icon.textContent = '';
+    });
+
+    const pwInput = document.getElementById('password');
+    pwInput.type = 'password';
+
+    const toggleBtn = document.getElementById('togglePasswordBtn');
+    toggleBtn.textContent = 'Anzeigen';
+  }
+
+  const toggleBtn = document.getElementById('togglePasswordBtn');
+  toggleBtn.addEventListener('click', () => {
+    const pwInput = document.getElementById('password');
+    if (pwInput.type === 'password') {
+      pwInput.type = 'text';
+      toggleBtn.textContent = 'Ausblenden';
+    } else {
+      pwInput.type = 'password';
+      toggleBtn.textContent = 'Anzeigen';
+    }
+  });
+
+  function escapeForRegex(str) {
+    return str.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
+  }
+</script>
+
+</body>
+</html>
