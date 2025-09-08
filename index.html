@@ -14,9 +14,9 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      font-family: Arial, sans-serif;
-      color: #fff;
+      background: #ffffff; /* weißer Hintergrund */
+      font-family: 'Poppins', sans-serif;
+      color: #212121;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -24,15 +24,13 @@
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.1);
+      background: #ffffff;
       border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
       max-width: 1200px;
       width: 100%;
       padding: 2.5rem 4rem;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid #E5E5E5;
     }
 
     h1 {
@@ -41,7 +39,8 @@
       margin-bottom: 1.8rem;
       text-align: center;
       letter-spacing: 1.2px;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      color: #046aac;
+      text-shadow: none;
     }
 
     form {
@@ -59,22 +58,22 @@
       width: 100%;
       padding: 0.85rem 1rem;
       font-size: 1.25rem;
-      border: none;
+      border: 1px solid #B8B8B8;
       border-radius: 12px;
       outline: none;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      box-shadow: inset 0 0 8px rgba(255,255,255,0.1);
-      transition: background-color 0.3s ease;
+      background: #fdfeff;
+      color: #212121;
+      box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     input[type="password"]:focus,
     input[type="text"]:focus {
-      background: rgba(255,255,255,0.3);
-      box-shadow: 0 0 12px #4caf50aa;
+      background: #ffffff;
+      border-color: #046aac;
+      box-shadow: 0 0 0 3px #d9ebf7;
     }
 
-    
     #togglePasswordBtn {
       position: absolute;
       right: 12px;
@@ -82,7 +81,7 @@
       transform: translateY(-50%);
       background: transparent;
       border: none;
-      color: #a9d18e;
+      color: #046aac;
       font-weight: 600;
       cursor: pointer;
       user-select: none;
@@ -91,7 +90,7 @@
       transition: color 0.3s ease;
     }
     #togglePasswordBtn:hover {
-      color: #81c784;
+      color: #003A61;
     }
 
     .button-row {
@@ -109,32 +108,32 @@
       border: none;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
       transition: background-color 0.25s ease, box-shadow 0.25s ease;
       color: #fff;
       user-select: none;
     }
 
     button[type="submit"] {
-      background: #4caf50;
-      box-shadow: 0 6px 18px #4caf50cc;
+      background: #046aac;
+      box-shadow: 0 6px 18px #046aaccc;
     }
     button[type="submit"]:hover {
-      background: #388e3c;
-      box-shadow: 0 8px 22px #388e3ccc;
+      background: #003A61;
+      box-shadow: 0 8px 22px #003A61cc;
     }
 
     button[type="button"]:not(#togglePasswordBtn) {
-      background: #e53935;
-      box-shadow: 0 6px 18px #e53935cc;
+      background: #B71C1C;
+      box-shadow: 0 6px 18px #B71C1Ccc;
     }
     button[type="button"]:not(#togglePasswordBtn):hover {
-      background: #b71c1c;
-      box-shadow: 0 8px 22px #b71c1ccc;
+      background: #8E1515;
+      box-shadow: 0 8px 22px #8E1515cc;
     }
 
     .rules-box {
-      background: rgba(0,0,0,0.3);
+      background: #ffffff;
       border-radius: 16px;
       padding: 1.75rem 2rem;
       max-width: 800px;
@@ -144,8 +143,8 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      border: 1px solid rgba(255,255,255,0.15);
-      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      border: 1px solid #E5E5E5;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
     }
 
     h2 {
@@ -153,14 +152,14 @@
       font-size: 1.7rem;
       margin: 0 0 1.2rem 0;
       text-align: center;
-      color: #d1d9e6;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      color: #515C66;
+      text-shadow: none;
     }
 
     p {
       text-align: center;
       font-size: 1rem;
-      color: #c5cee0;
+      color: #616161;
       margin-bottom: 1rem;
       font-weight: 500;
     }
@@ -177,33 +176,28 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #d1d9e6;
+      color: #515C66;
       font-weight: 500;
       transition: color 0.3s ease;
     }
 
     .valid {
       color: #81c784;
-      
     }
 
     .invalid {
-      color: #ef9a9a;
-     
+      color: #B71C1C;
     }
 
-
     .highlight {
-      background-color: rgba(255,255,255,0.15);
+      background-color: #E1EFF8;
       padding: 0.2rem 0.4rem;
       border-radius: 5px;
       font-family: 'Courier New', Courier, monospace;
       user-select: text;
-      color: #f0f4f8;
+      color: #046aac;
       letter-spacing: 0.03em;
     }
-
-
 
     @media (max-width: 600px) {
       .container {
@@ -222,15 +216,15 @@
         min-height: 350px;
       }
     }
-    
+
     .icon {
-    display: inline-block;
-    width: 1.5em;
-    text-align: center;
-    font-weight: 900;
-    font-size: 0.9rem;
-    user-select: none;
-    line-height: 1;
+      display: inline-block;
+      width: 1.5em;
+      text-align: center;
+      font-weight: 900;
+      font-size: 0.9rem;
+      user-select: none;
+      line-height: 1;
     }
     
     
@@ -350,3 +344,4 @@
 </body>
 
 </html>
+
