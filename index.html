@@ -203,12 +203,21 @@
     }
 
     .valid {
-      color: #81c784;
+      color: #2e7d32;
     }
 
     .invalid {
       color: #B71C1C;
     }
+
+     .intro-text {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #424242;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  font-weight: 500;
+}
 
     .highlight {
       background-color: #E1EFF8;
@@ -255,7 +264,12 @@
 <img class="logo" src="https://cargosoft.de/wp-content/uploads/cargosoft_logo.svg" alt="Cargosoft Logo">
 <div class="container">
   <h1>Passwort-Test</h1>
-
+ <p class="intro-text">
+  Die Passwortrichtlinie von <strong>CargoSoft</strong> gewährleistet, dass Passwörter ausreichend sicher sind 
+  und unterbindet die Verwendung von Zeichen, die in bestimmten technischen Kontexten zu Problemen führen können. 
+  Mit diesem Tool kann ein Passwort auf Konformität mit der Passwortrichtlinie geprüft werden. 
+  Das eingegebene Passwort wird <strong>nicht gespeichert</strong>!
+</p>
   <form id="passwordForm" onsubmit="event.preventDefault(); showResult();">
     <div class="password-container">
       <input type="password" id="password" autocomplete="off" placeholder="Passwort eingeben" />
@@ -319,7 +333,7 @@
       const li = document.getElementById(ruleId);
       const icon = li.querySelector('.icon');
       li.classList.remove('valid', 'invalid');
-      icon.textContent = isValid ? '✅' : '⛔';
+      icon.textContent = isValid ? '✅' : '❌';
       li.classList.add(isValid ? 'valid' : 'invalid');
     }
   }
@@ -365,6 +379,7 @@
 </body>
 
 </html>
+
 
 
 
